@@ -1,42 +1,24 @@
-group 'nl.garndesh'
-version '1.0-SNAPSHOT'
-
-apply plugin: 'java'
-apply plugin: 'forge'
-
-sourceCompatibility = 1.8
-
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-    }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-    }
+plugins {
+    id "net.minecraftforge.gradle.forge" version "2.0.2"
 }
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 version = "1.8-0.0.1"
-group= "nl.garndesh" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = "nl.garndesh.dockmaster" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "dockmaster"
 
 minecraft {
-    version = "1.8-11.14.4.1577"
-    runDir = "eclipse"
+    version = "1.8-11.14.4.1563"
+    runDir = "run"
 
     // the mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   snapshot are built nightly.
     // stable_#            stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not allways work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    //mappings = "snapshot_20141130"
+    mappings = "snapshot_20141130"
 }
 
 processResources
@@ -50,7 +32,7 @@ processResources
                 include 'mcmod.info'
 
                 // replace version and mcversion
-                expand 'version':project.version, 'mcversion':project.minecraft.version
+                expand 'version': project.version, 'mcversion': project.minecraft.version
             }
 
             // copy everything else, thats not the mcmod.info
@@ -59,7 +41,6 @@ processResources
             }
         }
 
-idea { module { inheritOutputDirs = true } }
 
 repositories {
     mavenCentral()
