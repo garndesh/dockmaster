@@ -48,6 +48,25 @@ public class MultiblockFormat {
         }
     }
 
+    public MultiblockFormat getNeighbours(BlockPos pos){
+        MultiblockFormat result = new MultiblockFormat();
+        for(int x = -1; x<2; x++){
+            for(int y = -1; y<2; y++){
+                for(int z = -1; z<2; z++){
+                    BlockPos currentPos = new BlockPos(pos.getX()+x, pos.getY()+y, pos.getZ()+z);
+                    if(hasBlockAtPos(currentPos)){
+                        result.setBlock(new BlockPos(x, y, z), multiBlock.get(currentPos));
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    public Block getBlockAtPos(BlockPos pos){
+        return multiBlock.get(pos);
+    }
+
     public BlockPos getLowestPosition(Class<? extends Block> blockType) {
         for (int x = lowerBound[0]; x <= upperBound[0]; x++) {
             for (int z = lowerBound[3]; z <= upperBound[3]; z++) {

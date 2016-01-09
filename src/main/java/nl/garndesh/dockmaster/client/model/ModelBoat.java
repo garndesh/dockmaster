@@ -11,13 +11,13 @@ import java.util.List;
  */
 public class ModelBoat extends ModelBase {
 
-    private List<ModelRenderer> panes = new ArrayList<>();
+    private List<ModelRenderer> blocks = new ArrayList<>();
 
     public ModelBoat() {
     }
 
-    public void addPane(ModelRenderer pane) {
-        panes.add(pane);
+    public void addBlock(ModelRenderer block) {
+        blocks.add(block);
     }
 
 

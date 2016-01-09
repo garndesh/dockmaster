@@ -20,3 +20,11 @@ build
 # other
 eclipse
 run
+
+saves/
+options.txt
+settings.gradle
+usernamecache.json
+crash-reports/
+config/
+logs/

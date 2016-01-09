@@ -1,5 +1,6 @@
 package nl.garndesh.dockmaster.client.render;
 
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;

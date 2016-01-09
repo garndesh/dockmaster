@@ -22,6 +22,9 @@ public class BoatGenerator {
             for (int z = lowerBound[3]; z <= upperBound[3]; z++) {
                 BlockPos pos = new BlockPos(x, lowerBound[2], z);
                 if (multiblockFormat.blockAtPosIsInstanceOf(pos, BlockHull.class)) {
+                    BlockHull block = (BlockHull) multiblockFormat.getBlockAtPos(pos);
+                    block.getRendererFromMultiblock(multiblockFormat.getNeighbours(pos));
+                    result.a
                     //return pos;
                 }
             }
