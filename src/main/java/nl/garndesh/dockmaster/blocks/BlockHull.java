@@ -1,9 +1,8 @@
 package nl.garndesh.dockmaster.blocks;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.creativetab.CreativeTabs;
+import nl.garndesh.dockmaster.client.render.IRenderer;
 import nl.garndesh.dockmaster.util.MultiblockFormat;
 
 /**
@@ -11,9 +10,9 @@ import nl.garndesh.dockmaster.util.MultiblockFormat;
  */
 public abstract class BlockHull extends BlockBase {
 
-    protected BlockHull() {
-        super("tmp", Material.anvil, CreativeTabs.tabBlock);
+    public BlockHull(String name, Material material) {
+        super(name, material, CreativeTabs.tabBlock);
     }
 
-    public abstract ModelRenderer getRendererFromMultiblock(MultiblockFormat multiblockFormat);
+    public abstract IRenderer getRendererFromMultiblock(MultiblockFormat multiblockFormat);
 }

@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import nl.garndesh.dockmaster.blocks.ModBlocks;
+import nl.garndesh.dockmaster.items.ModItems;
 import nl.garndesh.dockmaster.lib.Reference;
 import nl.garndesh.dockmaster.proxy.IProxy;
 import nl.garndesh.dockmaster.util.LogHelper;
@@ -42,7 +43,7 @@ public class Dockmaster {
         LogHelper.info("PreInit");
         event.getModMetadata().version = Reference.VERSION_NUMBER;
         ModBlocks.init();
-        //ModItems.init();
+        ModItems.init();
 
 
         LogHelper.info("PreInit done");

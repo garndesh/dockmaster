@@ -4,43 +4,49 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import nl.garndesh.dockmaster.client.model.ModelBoat;
+import nl.garndesh.dockmaster.util.BoatGenerator;
+import nl.garndesh.dockmaster.util.MultiblockFormat;
 
 /**
  * Created by cte20616 on 4-1-2016.
  */
 public class EntityBoat extends Entity {
 
-    private int length;
-    private int width;
-    private int height;
+    private static final String NBT_MULTIBLOCK_TAG = "multiblock";
+    private ModelBoat modelBoat;
+    private MultiblockFormat multiblock;
 
-    public EntityBoat(World world) {
-        this(world, 3, 1, 1);
+    public EntityBoat(World world){
+        this(world, new MultiblockFormat());
     }
 
-    public EntityBoat(World world, int length, int width, int height){
+    public EntityBoat(World world, MultiblockFormat multiblock){
         super(world);
-        this.height = height;
-        this.width = width;
-        this.length = length;
+        this.multiblock = multiblock;
+        modelBoat = BoatGenerator.generateModelFromMultiblockFormat(multiblock);
     }
 
     @Override
     protected void entityInit() {
-
     }
 
     @Override
     protected void readEntityFromNBT(NBTTagCompound tagCompund) {
-        int[] size = tagCompund.getIntArray("size");
-        height = size[0];
-        width = size[1];
-        length = size[3];
+        NBTTagCompound multiData = tagCompund.getCompoundTag(NBT_MULTIBLOCK_TAG);
+        this.multiblock = new MultiblockFormat();
+        this.multiblock.readMultiblockFromNBT(multiData);
     }
 
     @Override
     protected void writeEntityToNBT(NBTTagCompound tagCompound) {
-        tagCompound.setIntArray("size", new int[] {height, width, length});
+        NBTTagCompound newTag = new NBTTagCompound();
+        multiblock.writeMultiblockToNBT(newTag);
+        tagCompound.setTag(NBT_MULTIBLOCK_TAG, newTag);
+    }
+
+    public ModelBoat getModelBoat() {
+        return modelBoat;
     }
 
     /**

@@ -1,16 +1,18 @@
 package nl.garndesh.dockmaster.util;
 
 import net.minecraft.block.Block;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by christiaan on 1/4/16.
  */
 public class MultiblockFormat {
 
+    private static final String NBT_BLOCKLIST_TAG = "blocklist";
     private Map<BlockPos, Block> multiBlock = new HashMap<>();
 
     private int[] lowerBound = new int[3], upperBound = new int[3];
@@ -63,6 +65,10 @@ public class MultiblockFormat {
         return result;
     }
 
+    public Set<BlockPos> getKeyset(){
+        return multiBlock.keySet();
+    }
+
     public Block getBlockAtPos(BlockPos pos){
         return multiBlock.get(pos);
     }
@@ -89,6 +95,31 @@ public class MultiblockFormat {
         }
 
         return false;
+    }
+    
+    public void writeMultiblockToNBT(NBTTagCompound tag){
+        int count = 0;
+        multiBlock.forEach((blockPos, block) -> {
+            NBTTagCompound newTag = new NBTTagCompound();
+            newTag.setInteger("x", blockPos.getX());
+            newTag.setInteger("y", blockPos.getY());
+            newTag.setInteger("z", blockPos.getZ());
+            newTag.setString("block",block.getUnlocalizedName());
+            tag.setTag(NBT_BLOCKLIST_TAG+count, newTag);
+        });
+    }
+    
+    public void readMultiblockFromNBT(NBTTagCompound tag){
+        tag.getKeySet().forEach(name -> {
+            NBTTagCompound entry = tag.getCompoundTag((String)name);
+            BlockPos pos = new BlockPos(
+                    entry.getInteger("x"),
+                    entry.getInteger("y"),
+                    entry.getInteger("z")
+            );
+            Block b = Block.getBlockFromName(entry.getString("block"));
+            multiBlock.put(pos, b);
+        });
     }
 
     public boolean hasBlockAtPos(BlockPos pos) {
