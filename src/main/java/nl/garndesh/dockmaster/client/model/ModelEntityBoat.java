@@ -1,16 +1,14 @@
 package nl.garndesh.dockmaster.client.model;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.renderer.GLAllocation;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import nl.garndesh.dockmaster.client.render.IRenderer;
-import nl.garndesh.dockmaster.entity.EntityBoat;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -22,11 +20,12 @@ import java.util.List;
 public class ModelEntityBoat extends ModelBase {
 
     private List<IRenderer> blocks = new ArrayList<>();
-    private int displayList;
+    private int displayList = 0;
     private boolean compiled = false;
 
     public void addBlock(IRenderer block){
         this.blocks.add(block);
+        this.compiled = false;
     }
 
     @Override
@@ -34,6 +33,7 @@ public class ModelEntityBoat extends ModelBase {
         if(!compiled){
             compileDisplayList(deltaTime);
         }
+        GlStateManager.callList(displayList);
 
     }
 
@@ -41,7 +41,7 @@ public class ModelEntityBoat extends ModelBase {
     @SideOnly(Side.CLIENT)
     private void compileDisplayList(float deltaTime)
     {
-        this.displayList = GLAllocation.generateDisplayLists(1);
+        if(displayList == 0) this.displayList = GLAllocation.generateDisplayLists(1);
         GL11.glNewList(this.displayList, GL11.GL_COMPILE);
         WorldRenderer worldrenderer = Tessellator.getInstance().getWorldRenderer();
 

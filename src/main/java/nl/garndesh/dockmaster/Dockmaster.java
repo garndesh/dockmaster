@@ -6,7 +6,9 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import nl.garndesh.dockmaster.blocks.ModBlocks;
+import nl.garndesh.dockmaster.entity.EntityBoat;
 import nl.garndesh.dockmaster.items.ModItems;
 import nl.garndesh.dockmaster.lib.Reference;
 import nl.garndesh.dockmaster.proxy.IProxy;
@@ -45,7 +47,7 @@ public class Dockmaster {
         ModBlocks.init();
         ModItems.init();
 
-
+        EntityRegistry.registerModEntity(EntityBoat.class, "new boat", EntityRegistry.findGlobalUniqueEntityId(), this, 20, 3, true);
         LogHelper.info("PreInit done");
     }
 

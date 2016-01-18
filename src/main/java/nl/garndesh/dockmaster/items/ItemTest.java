@@ -23,7 +23,8 @@ public class ItemTest extends ItemBase {
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player){
 
-        if(!world.isRemote) {
+        if(world.isRemote) {
+            System.out.println("Clicked");
             MultiblockFormat multiblock = new MultiblockFormat();
             for (int x = -10; x < 10; x++) {
                 for (int y = -10; y < 10; y++) {
@@ -38,10 +39,18 @@ public class ItemTest extends ItemBase {
                     }
                 }
             }
-            System.out.printf("multiblock size: " + multiblock.getLowerBound()[0] + " " +multiblock.getUpperBound()[0]);
-            EntityBoat boat = new EntityBoat(world, multiblock);
-            boat.setPosition(player.posX + 10, player.posY, player.posZ);
-            world.spawnEntityInWorld(boat);
+
+            System.out.println("multiblock size: " + multiblock.getKeyset().size());
+            if(multiblock.getKeyset().size() > 0) {
+                EntityBoat boat = new EntityBoat(world, multiblock);
+                boat.setPosition(player.posX + 10, player.posY, player.posZ);
+                System.out.println("spawning in boat at: " + boat.getPosition().toString());
+                world.spawnEntityInWorld(boat);
+
+                net.minecraft.entity.item.EntityBoat b = new net.minecraft.entity.item.EntityBoat(world);
+                b.setPosition(player.posX + 10, player.posY + 4, player.posZ);
+                world.spawnEntityInWorld(b);
+            }
         }
         return itemStack;
     }

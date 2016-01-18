@@ -4,7 +4,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import nl.garndesh.dockmaster.client.model.ModelBoat;
 import nl.garndesh.dockmaster.client.model.ModelEntityBoat;
 import nl.garndesh.dockmaster.util.BoatGenerator;
 import nl.garndesh.dockmaster.util.MultiblockFormat;
@@ -30,6 +29,13 @@ public class EntityBoat extends Entity {
 
     @Override
     protected void entityInit() {
+        System.out.printf("entity init");
+    }
+
+    @Override
+    public void setDead(){
+        super.setDead();
+        System.out.println("boat is dead");
     }
 
     @Override
