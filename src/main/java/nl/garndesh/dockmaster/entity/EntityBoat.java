@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import nl.garndesh.dockmaster.client.model.ModelBoat;
+import nl.garndesh.dockmaster.client.model.ModelEntityBoat;
 import nl.garndesh.dockmaster.util.BoatGenerator;
 import nl.garndesh.dockmaster.util.MultiblockFormat;
 
@@ -14,7 +15,7 @@ import nl.garndesh.dockmaster.util.MultiblockFormat;
 public class EntityBoat extends Entity {
 
     private static final String NBT_MULTIBLOCK_TAG = "multiblock";
-    private ModelBoat modelBoat;
+    private ModelEntityBoat modelBoat;
     private MultiblockFormat multiblock;
 
     public EntityBoat(World world){
@@ -45,7 +46,7 @@ public class EntityBoat extends Entity {
         tagCompound.setTag(NBT_MULTIBLOCK_TAG, newTag);
     }
 
-    public ModelBoat getModelBoat() {
+    public ModelEntityBoat getModelBoat() {
         return modelBoat;
     }
 

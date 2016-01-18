@@ -53,9 +53,17 @@ public class ModelDistortedCube implements IRenderer {
             6, 3, 2  //left face
     };
 
-    public ModelDistortedCube(MultiblockFormat neighbours) {
+    public ModelDistortedCube(MultiblockFormat neighbours, BlockPos pos) {
         updateCornerPositions(neighbours);
+        moveToPosition(pos);
         updateQuadlist();
+    }
+
+    private void moveToPosition(BlockPos pos) {
+        for (Vector3f corner :
+                corners) {
+            corner.translate(pos.getX() * 2, pos.getY() * 2, pos.getZ() * 2);
+        }
     }
 
     private void updateCornerPositions(MultiblockFormat neighbours) {

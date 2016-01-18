@@ -14,19 +14,9 @@ import java.util.List;
  */
 public class ModelBoat extends ModelBase {
 
-    private List<IRenderer> blocks = new ArrayList<>();
-
-    public ModelBoat() {
-    }
-
     @Override
-    public void render(Entity boat_, float x, float y, float z, float p_78088_5_, float p_78088_6_, float p_78088_7_) {
-
-    }
-
-
-    public void addBlock(IRenderer block) {
-        blocks.add(block);
+    public void render(Entity boat, float x, float y, float z, float p_78088_5_, float p_78088_6_, float p_78088_7_) {
+        ((EntityBoat)boat).getModelBoat().render(boat, x, y, z, p_78088_5_, p_78088_6_, p_78088_7_);
     }
 
 

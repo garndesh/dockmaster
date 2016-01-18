@@ -1,6 +1,7 @@
 package nl.garndesh.dockmaster.blocks;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.util.BlockPos;
 import nl.garndesh.dockmaster.client.model.ModelDistortedCube;
 import nl.garndesh.dockmaster.client.render.IRenderer;
 import nl.garndesh.dockmaster.util.MultiblockFormat;
@@ -15,7 +16,7 @@ public class BlockHullWood extends BlockHull {
     }
 
     @Override
-    public IRenderer getRendererFromMultiblock(MultiblockFormat multiblockFormat) {
-        return new ModelDistortedCube(multiblockFormat);
+    public IRenderer getRendererFromMultiblock(MultiblockFormat multiblockFormat, BlockPos pos) {
+        return new ModelDistortedCube(multiblockFormat, pos);
     }
 }
