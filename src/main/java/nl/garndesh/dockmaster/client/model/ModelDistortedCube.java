@@ -127,7 +127,7 @@ public class ModelDistortedCube implements IRenderer {
     public void render(WorldRenderer worldrenderer, float dt) {
         for (TexturedQuad q :
                 quadList) {
-            q.func_178765_a(worldrenderer, dt);
+            q.draw(worldrenderer, dt);
         }
     }
 }

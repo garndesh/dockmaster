@@ -30,13 +30,15 @@ public class ItemTest extends ItemBase {
                     for (int z = -10; z < 10; z++) {
                         BlockPos pos = new BlockPos(player.posX + x, player.posY + y, player.posZ + z);
                         Block b = world.getChunkFromBlockCoords(pos).getBlock(pos);
+                        //System.out.println("checking block pos " + pos.toString());
                         if (b instanceof BlockHull) {
+                            //System.out.println("adding block " + ((BlockHull) b).getName());
                             multiblock.setBlock(new BlockPos(x, y, z), b);
                         }
                     }
                 }
             }
-
+            System.out.printf("multiblock size: " + multiblock.getLowerBound()[0] + " " +multiblock.getUpperBound()[0]);
             EntityBoat boat = new EntityBoat(world, multiblock);
             boat.setPosition(player.posX + 10, player.posY, player.posZ);
             world.spawnEntityInWorld(boat);

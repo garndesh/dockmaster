@@ -19,6 +19,7 @@ public class MultiblockFormat {
 
     public void setBlock(BlockPos pos, Block block) {
         multiBlock.put(pos, block);
+        updateBounds(pos);
     }
 
     public int[] getLowerBound() {
@@ -73,11 +74,11 @@ public class MultiblockFormat {
         return multiBlock.get(pos);
     }
 
-    public BlockPos getLowestPosition(Class<? extends Block> blockType) {
+    public BlockPos getLowestPosition(String unlocalizedName) {
         for (int x = lowerBound[0]; x <= upperBound[0]; x++) {
             for (int z = lowerBound[3]; z <= upperBound[3]; z++) {
                 BlockPos pos = new BlockPos(x, lowerBound[2], z);
-                if (blockAtPosIsInstanceOf(pos, blockType)) {
+                if (blockAtPosIsInstanceOf(pos, unlocalizedName)) {
                     return pos;
                 }
             }
@@ -89,9 +90,9 @@ public class MultiblockFormat {
         return multiBlock;
     }
 
-    public boolean blockAtPosIsInstanceOf(BlockPos pos, Class<? extends Block> blockType) {
+    public boolean blockAtPosIsInstanceOf(BlockPos pos, String unlocalizedName) {
         if (hasBlockAtPos(pos)) {
-            return multiBlock.get(pos).getClass() == blockType;
+            return multiBlock.get(pos).getUnlocalizedName().equalsIgnoreCase(unlocalizedName);
         }
 
         return false;

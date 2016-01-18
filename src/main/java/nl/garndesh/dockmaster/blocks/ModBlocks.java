@@ -6,9 +6,12 @@ package nl.garndesh.dockmaster.blocks;
 public class ModBlocks {
 
     public static BlockDock dock;
+    public static BlockHullWood hullWood;
 
     public static void init(){
         dock = new BlockDock();
+        hullWood = new BlockHullWood();
     }
+
 
 }

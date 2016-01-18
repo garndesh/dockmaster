@@ -17,6 +17,7 @@ public class ModelBoat extends ModelBase {
     @Override
     public void render(Entity boat, float x, float y, float z, float p_78088_5_, float p_78088_6_, float p_78088_7_) {
         ((EntityBoat)boat).getModelBoat().render(boat, x, y, z, p_78088_5_, p_78088_6_, p_78088_7_);
+
     }
 
 
